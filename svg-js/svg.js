@@ -14,13 +14,20 @@ svg.setAttribute('width', width);
 svg.setAttribute('height', height);
 document.body.appendChild(svg);
 
+const defs = document.createElementNS('http://www.w3.org/2000/svg','defs')
+svg.appendChild(defs)
+
+const group1=document.createElementNS('http://www.w3.org/2000/svg','g')
+group1.setAttribute('id','design1')
+defs.appendChild(group1)
+
 const mask_circle_y = document.createElementNS('http://www.w3.org/2000/svg', 'mask');
 mask_circle_y.setAttribute('id', 'mask-circle-y');
-svg.appendChild(mask_circle_y);
+group1.appendChild(mask_circle_y);
 
 const mask_circle_x = document.createElementNS('http://www.w3.org/2000/svg', 'mask');
 mask_circle_x.setAttribute('id', 'mask-circle-x');
-svg.appendChild(mask_circle_x);
+group1.appendChild(mask_circle_x);
 
 const mask_rect_y = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
 
@@ -59,7 +66,7 @@ for(let i=0;i<n;i++){
     recty.setAttribute('height', '10');
     
     recty.setAttribute('mask','url(#mask-circle-y)');
-    svg.appendChild(recty);
+    group1.appendChild(recty);
     
 }
 // rabbit hole
@@ -70,9 +77,18 @@ for(let i=0;i<n;i++){
     rectx.setAttribute('width', 10);
     rectx.setAttribute('height', height);
     rectx.setAttribute('mask','url(#mask-circle-x)');
-    svg.appendChild(rectx);
+    group1.appendChild(rectx);
 
 
     
     
 }
+
+const use1=document.createElementNS('http://www.w3.org/2000/svg','use')
+use1.setAttribute('href','#design1')
+use1.setAttribute('x',10)
+use1.setAttribute('y',10)
+svg.appendChild(use1)
+
+const symbol = document.createElementNS('http://www.w3.org/2000/svg','symbol') // same like defs but not contain multiple group, symbol has own ref id
+
